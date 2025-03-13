@@ -6,6 +6,8 @@ export const  generateAuthToken= (type) => {
         // password : nopass123
         // Signed in at 13/3/25 14:48 WIB
         res = "426|JYoHYrzEL6ywvSDrl0bRKMp79N3GaL4qhBSbKQeE16c6f97b"
+    } else if(type == "hardcode_admin"){
+        res = "301|GjU9FHN9TGSz3L1wAtL7X38Y29kuAN8jT415SXpQe5e7fd02"
     }
 
     return res
