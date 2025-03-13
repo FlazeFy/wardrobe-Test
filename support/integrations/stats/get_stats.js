@@ -1,11 +1,10 @@
 // Components
-import { generateAuthToken, generateDayName, generateRandDate } from '../../components/generate'
+import { generateAuthToken } from '../../components/generate'
 import '../../components/template'
 
 describe('Wardrobe API Testing - Stats', () => {
     const is_paginate = false
     const token = generateAuthToken("hardcode")
-    const date = generateRandDate()
 
     it('Get Stats Clothes Most Context', () => {
         const ctx = 'clothes_merk'
@@ -28,11 +27,11 @@ describe('Wardrobe API Testing - Stats', () => {
 
             // Get list key / column
             const stringFields = ['context']
-            const intiFelds = ['total']
+            const intFelds = ['total']
 
             // Validate column
             cy.templateValidateColumn(dataArr, stringFields, 'string', false)
-            cy.templateValidateColumn(dataArr, intiFelds, 'number', false)
+            cy.templateValidateColumn(dataArr, intFelds, 'number', false)
         })
     })
 
@@ -148,6 +147,62 @@ describe('Wardrobe API Testing - Stats', () => {
             // Validate column
             cy.templateValidateColumn(dataArr, stringFields, 'string', false)
             cy.templateValidateColumn(dataArr, intFields, 'number', false)
+        })
+    })
+
+    it('Get Stats Outfit Yearly Most Used', () => {
+        const year = 2025
+
+        cy.request({
+            method: 'get',
+            url: `/api/v1/stats/outfit/most/used/${year}`,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).as('GetStatsOutfitYearlyMostUsed')
+        cy.get('@GetStatsOutfitYearlyMostUsed').then(dt => {
+            cy.templateGet(200,dt, is_paginate)
+
+            // Get item holder
+            const resultItem = dt.body
+            expect(resultItem).to.have.property('data')
+            const dataArr = resultItem.data
+            expect(dataArr).to.be.an('array')
+
+            // Get list key / column
+            const stringFields = ['context']
+            const intFields = ['total']
+
+            // Validate column
+            cy.templateValidateColumn(dataArr, stringFields, 'string', false)
+            cy.templateValidateColumn(dataArr, intFields, 'number', false)
+        })
+    })
+
+    it('Get Stats Wash Summary', () => {
+        cy.request({
+            method: 'get',
+            url: `/api/v1/stats/wash/summary`,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).as('GetStatsWashSummary')
+        cy.get('@GetStatsWashSummary').then(dt => {
+            cy.templateGet(200,dt, null)
+
+            // Get item holder
+            const resultItem = dt.body
+            expect(resultItem).to.have.property('data')
+            const dataObj = resultItem.data
+            expect(dataObj).to.be.an('object')
+
+            // Get list key / column
+            const stringFields = ['last_wash_clothes','last_wash_date','most_wash']
+            const intFields = ['total_wash','avg_wash_dur_per_clothes','avg_wash_per_week']
+
+            // Validate column
+            cy.templateValidateColumn(dataObj, stringFields, 'string', false)
+            cy.templateValidateColumn(dataObj, intFields, 'number', false)
         })
     })
 })
