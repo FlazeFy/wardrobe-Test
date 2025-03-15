@@ -28,6 +28,15 @@ describe('Wardrobe API Testing - History', () => {
 
             // Validate column
             cy.templateValidateColumn(dataArr, stringFields, 'string', false)
+
+            // Validate character length
+            const columnProps = [
+                { column_name : 'id', data_type: 'string', max: 36, min: 36, nullable: false },
+                { column_name : 'history_type', data_type: 'string', max: 36, min: 1, nullable: false },
+                { column_name : 'history_context', data_type: 'string', max: 255, min: 1, nullable: false },
+                { column_name : 'created_by', data_type: 'string', max: 36, min: 36, nullable: false }
+            ]
+            cy.templateValidateMaxMin(dataArr, columnProps)
         })
     })
 })

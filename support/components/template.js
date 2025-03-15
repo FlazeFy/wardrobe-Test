@@ -118,6 +118,42 @@ Cypress.Commands.add('templateOrdering', (data, target, typeOrdering, typeData) 
     })
 })
 
+Cypress.Commands.add('templateValidateMaxMin', (data, obj) => {
+    const dataArray = Array.isArray(data) ? data : [data];
+
+    dataArray.forEach((item) => {
+        obj.forEach((field) => {
+            const col_name = field['column_name']
+            const data_type = field['data_type']
+            const max = field['max']
+            const min = field['min']
+            const nullable = field['nullable']
+            const props_msg = `${data_type == 'number' ? 'value' : data_type == 'string' ? 'character length' : ''}`
+
+            if (!nullable || item[col_name] != null) {
+                let data_length = null 
+
+                if(data_type === "number"){
+                   data_length = item[col_name]
+                } else if(data_type === "string"){
+                    data_length = item[col_name].length
+                }
+
+                if(max && min && max == min){
+                    expect(data_length, `Column ${col_name} ${props_msg} must equal to ${max}`).to.be.equal(max)
+                } else {
+                    if (max !== null && max !== undefined) {
+                        expect(data_length, `Column ${col_name} must have ${props_msg} less than or equal to ${max}`).to.be.at.most(max)
+                    }
+                    if (min !== null && min !== undefined) {
+                        expect(data_length, `Column ${col_name} must have ${props_msg} more than or equal to ${min}`).to.be.at.least(min)
+                    }
+                }
+            }
+        });
+    });
+})
+
 // End to End Component
 Cypress.Commands.add('templateE2EValidateConsumeBox', () => {
     cy.get('#consume-holder').wait(2000).should('exist').children() 
