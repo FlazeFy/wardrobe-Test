@@ -32,6 +32,15 @@ describe('Wardrobe API Testing - User', () => {
             cy.templateValidateColumn(dataObj, stringFields, 'string', false)
             cy.templateValidateColumn(dataObj, stringNullableFields, 'string', true)
             cy.templateValidateColumn(dataObj, intFields, 'number', false)
+
+            // Validate character length
+            const columnProps = [
+                { column_name : 'username', data_type: 'string', max: 36, min: 6, nullable: false },
+                { column_name : 'email', data_type: 'string', max: 144, min: 10, nullable: false },
+                { column_name : 'telegram_user_id', data_type: 'string', max: 36, min: 10, nullable: true },
+                { column_name : 'telegram_is_valid', data_type: 'number', max: 1, min: 0, nullable: false },
+            ]
+            cy.templateValidateMaxMin(dataObj, columnProps)
         })
     })
 })

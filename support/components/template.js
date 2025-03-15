@@ -134,7 +134,7 @@ Cypress.Commands.add('templateValidateMaxMin', (data, obj) => {
                 let data_length = null 
 
                 if(data_type === "number"){
-                   data_length = item[col_name]
+                    data_length = item[col_name]
                 } else if(data_type === "string"){
                     data_length = item[col_name].length
                 }

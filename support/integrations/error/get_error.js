@@ -32,6 +32,18 @@ describe('Wardrobe API Testing - Error', () => {
             cy.templateValidateColumn(dataArr, stringFields, 'string', false)
             cy.templateValidateColumn(dataArr, stringNullableFields, 'string', true)
             cy.templateValidateColumn(dataArr, intFields, 'number', false)
+
+            // Validate character length
+            // created_by : username
+            const columnProps = [
+                { column_name : 'id', data_type: 'number', max: null, min: 1, nullable: false },
+                { column_name : 'faced_by', data_type: 'string', max: 36, min: 6, nullable: true },
+                { column_name : 'line', data_type: 'number', max: 99999999999, min: 1, nullable: false },
+                { column_name : 'file', data_type: 'string', max: 255, min: 1, nullable: false },
+                { column_name : 'message', data_type: 'string', max: null, min: 1, nullable: false },
+                { column_name : 'stack_trace', data_type: 'string', max: null, min: 1, nullable: false },
+            ]
+            cy.templateValidateMaxMin(dataArr, columnProps)
         })
     })
 })

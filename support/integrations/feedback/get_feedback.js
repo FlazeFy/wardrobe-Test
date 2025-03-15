@@ -30,6 +30,16 @@ describe('Wardrobe API Testing - Feedback', () => {
             // Validate column
             cy.templateValidateColumn(dataArr, stringFields, 'string', false)
             cy.templateValidateColumn(dataArr, intFields, 'number', false)
+
+            // Validate character length
+            // created_by : username
+            const columnProps = [
+                { column_name : 'id', data_type: 'string', max: 36, min: 36, nullable: false },
+                { column_name : 'created_by', data_type: 'string', max: 36, min: 6, nullable: false },
+                { column_name : 'feedback_body', data_type: 'string', max: 144, min: 1, nullable: false },
+                { column_name : 'feedback_rate', data_type: 'number', max: 5, min: 1, nullable: false },
+            ]
+            cy.templateValidateMaxMin(dataArr, columnProps)
         })
     })
 })

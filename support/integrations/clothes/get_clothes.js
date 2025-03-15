@@ -57,6 +57,26 @@ describe('Wardrobe API Testing - Clothes', () => {
             cy.templateValidateColumn(dataArr, stringFields, 'string', false)
             cy.templateValidateColumn(dataArr, intFields, 'number', false)
             cy.templateValidateColumn(dataArr, boolIntFields, 'number', false)
+
+            // Validate character length
+            const columnPropsClothes = [
+                { column_name : 'id', data_type: 'string', max: 36, min: 36, nullable: false },
+                { column_name : 'clothes_name', data_type: 'string', max: 75, min: 1, nullable: false },
+                { column_name : 'clothes_size', data_type: 'string', max: 3, min: 1, nullable: true },
+                { column_name : 'clothes_gender', data_type: 'string', max: 6, min: 1, nullable: true },
+                { column_name : 'clothes_merk', data_type: 'string', max: 75, min: 1, nullable: true },
+                { column_name : 'clothes_image', data_type: 'string', max: 500, min: 1, nullable: true },    
+                { column_name : 'clothes_color', data_type: 'string', max: 36, min: 1, nullable: true },    
+                { column_name : 'clothes_type', data_type: 'string', max: 36, min: 1, nullable: false },
+                { column_name : 'clothes_qty', data_type: 'number', max: null, min: 1, nullable: false },
+                { column_name : 'clothes_category', data_type: 'string', max: 36, min: 1, nullable: false },
+                { column_name : 'is_faded', data_type: 'number', max: 1, min: 0, nullable: false },
+                { column_name : 'has_washed', data_type: 'number', max: 1, min: 0, nullable: false },
+                { column_name : 'has_ironed', data_type: 'number', max: 1, min: 0, nullable: false },
+                { column_name : 'is_favorite', data_type: 'number', max: 1, min: 0, nullable: false },
+                { column_name : 'is_scheduled', data_type: 'number', max: 1, min: 0, nullable: false },
+            ]
+            cy.templateValidateMaxMin(dataArr, columnPropsClothes)
         })
     })
 
@@ -93,6 +113,27 @@ describe('Wardrobe API Testing - Clothes', () => {
             cy.templateValidateColumn(dataArr, intFields, 'number', false)
             cy.templateValidateColumn(dataArr, intNullableFields, 'number', true)
             cy.templateValidateColumn(dataArr, boolIntFields, 'number', false)
+
+            // Validate character length
+            const columnPropsClothes = [
+                { column_name : 'id', data_type: 'string', max: 36, min: 36, nullable: false },
+                { column_name : 'clothes_name', data_type: 'string', max: 75, min: 1, nullable: false},
+                { column_name : 'clothes_size', data_type: 'string', max: 3, min: 1, nullable: true },
+                { column_name : 'clothes_gender', data_type: 'string', max: 6, min: 1, nullable: true },
+                { column_name : 'clothes_merk', data_type: 'string', max: 75, min: 1, nullable: true },
+                { column_name : 'clothes_image', data_type: 'string', max: 500, min: 1, nullable: true },    
+                { column_name : 'clothes_color', data_type: 'string', max: 36, min: 1, nullable: true },    
+                { column_name : 'clothes_type', data_type: 'string', max: 36, min: 1, nullable: false },
+                { column_name : 'clothes_qty', data_type: 'number', max: null, min: 1, nullable: false },
+                { column_name : 'clothes_price', data_type: 'number', max: null, min: 1, nullable: false },
+                { column_name : 'clothes_category', data_type: 'string', max: 36, min: 1, nullable: false },
+                { column_name : 'is_faded', data_type: 'number', max: 1, min: 0, nullable: false },
+                { column_name : 'has_washed', data_type: 'number', max: 1, min: 0, nullable: false },
+                { column_name : 'has_ironed', data_type: 'number', max: 1, min: 0, nullable: false },
+                { column_name : 'is_favorite', data_type: 'number', max: 1, min: 0, nullable: false },
+                { column_name : 'is_scheduled', data_type: 'number', max: 1, min: 0, nullable: false },
+            ]
+            cy.templateValidateMaxMin(dataArr, columnPropsClothes)
         })
     })
 
@@ -122,6 +163,15 @@ describe('Wardrobe API Testing - Clothes', () => {
 
             // Validate column
             cy.templateValidateColumn(dataArr, stringFields, 'string', false)
+
+            // Validate character length
+            const columnProps = [
+                { column_name : 'id', data_type: 'string', max: 36, min: 36, nullable: false },
+                { column_name : 'clothes_name', data_type: 'string', max: 75, min: 1, nullable: false },
+                { column_name : 'clothes_category', data_type: 'string', max: 36, min: 1, nullable: false },
+                { column_name : 'clothes_type', data_type: 'string', max: 36, min: 1, nullable: false },
+            ]
+            cy.templateValidateMaxMin(dataArr, columnProps)
         })
     })
 
@@ -151,6 +201,13 @@ describe('Wardrobe API Testing - Clothes', () => {
 
             cy.templateValidateColumn(dataObj, stringFields, 'string', false)
             cy.templateValidateColumn(dataObj, stringNullableFields, 'string', true)
+
+            // Validate character length
+            const columnProps = [
+                { column_name : 'wash_type', data_type: 'string', max: 36, min: 1, nullable: false },
+                { column_name : 'wash_note', data_type: 'string', max: 75, min: 1, nullable: true },
+            ]
+            cy.templateValidateMaxMin(dataObj, columnProps)
 
             if(washCheckpoint){
                 expect(washCheckpoint).to.be.an('array')
@@ -193,6 +250,19 @@ describe('Wardrobe API Testing - Clothes', () => {
             cy.templateValidateColumn(dataArr, stringFields, 'string', false)
             cy.templateValidateColumn(dataArr, stringNullableFields, 'string', true)
             cy.templateValidateColumn(dataArr, intFields, 'number', false)   
+
+            // Validate character length
+            const columnProps = [
+                { column_name : 'id', data_type: 'string', max: 36, min: 36, nullable: false },
+                { column_name : 'clothes_name', data_type: 'string', max: 75, min: 1, nullable: false },
+                { column_name : 'clothes_size', data_type: 'string', max: 3, min: 1, nullable: false },
+                { column_name : 'clothes_gender', data_type: 'string', max: 6, min: 1, nullable: false },    
+                { column_name : 'clothes_color', data_type: 'string', max: 6, min: 1, nullable: false },    
+                { column_name : 'clothes_type', data_type: 'string', max: 36, min: 1, nullable: false },
+                { column_name : 'clothes_category', data_type: 'string', max: 36, min: 1, nullable: false },
+                { column_name : 'clothes_qty', data_type: 'number', max: 999, min: 1, nullable: false },
+            ]
+            cy.templateValidateMaxMin(dataArr, columnProps)
         })
     })
 
@@ -234,6 +304,14 @@ describe('Wardrobe API Testing - Clothes', () => {
                     // // Validate column
                     cy.templateValidateColumn(dt, stringFieldsUsedHistory, 'string', false)
                     cy.templateValidateColumn(dt, stringNullableFieldsUsedHistory, 'string', true)
+
+                    // Validate character length
+                    const columnPropsUsedHistory= [
+                        { column_name : 'id', data_type: 'string', max: 36, min: 36, nullable: false },
+                        { column_name : 'used_context', data_type: 'string', max: 36, min: 1, nullable: false },
+                        { column_name : 'clothes_note', data_type: 'string', max: 255, min: 1, nullable: true },
+                    ]
+                    cy.templateValidateMaxMin(dt, columnPropsUsedHistory)
                 })
             }
 
@@ -273,6 +351,16 @@ describe('Wardrobe API Testing - Clothes', () => {
                     cy.templateValidateColumn(dt, stringFieldsOutfit, 'string', false)
                     cy.templateValidateColumn(dt, stringNullableFieldsOutfit, 'string', true)
                     cy.templateValidateColumn(dt, intFieldsOutfit, 'number', false)
+
+                    // Validate character length
+                    const columnPropsOutfit = [
+                        { column_name : 'id', data_type: 'string', max: 36, min: 36, nullable: false },
+                        { column_name : 'outfit_name', data_type: 'string', max: 36, min: 1, nullable: false },
+                        { column_name : 'outfit_note', data_type: 'string', max: 255, min: 1, nullable: true },
+                        { column_name : 'is_favorite', data_type: 'number', max: 1, min: 0, nullable: false },
+                        { column_name : 'total_used', data_type: 'number', max: null, min: 0, nullable: false },
+                    ]
+                    cy.templateValidateMaxMin(dt, columnPropsOutfit)
                 })
             }
         })
@@ -305,6 +393,16 @@ describe('Wardrobe API Testing - Clothes', () => {
             cy.templateValidateColumn(dataArr, stringNullableFields, 'string', true)
             cy.templateValidateColumn(dataArr, intFields, 'number', false)
 
+            // Validate character length
+            const columnProps = [
+                { column_name : 'id', data_type: 'string', max: 36, min: 36, nullable: false },
+                { column_name : 'outfit_name', data_type: 'string', max: 36, min: 1, nullable: false },
+                { column_name : 'outfit_note', data_type: 'string', max: 255, min: 1, nullable: true },
+                { column_name : 'is_favorite', data_type: 'number', max: 1, min: 0, nullable: false },
+                { column_name : 'total_used', data_type: 'number', max: null, min: 0, nullable: false },
+            ]
+            cy.templateValidateMaxMin(dataArr, columnProps)
+
             dataArr.forEach(dt => {
                 if(dt['clothes']){
                     dt['clothes'].forEach(dt_cl => {
@@ -317,6 +415,18 @@ describe('Wardrobe API Testing - Clothes', () => {
                         cy.templateValidateColumn(dt_cl, stringFields, 'string', false)
                         cy.templateValidateColumn(dt_cl, stringNullableFields, 'string', true)
                         cy.templateValidateColumn(dt_cl, intFields, 'number', false)
+
+                        // Validate character length
+                        const columnPropsClothes = [
+                            { column_name : 'id', data_type: 'string', max: 36, min: 36, nullable: false },
+                            { column_name : 'clothes_name', data_type: 'string', max: 75, min: 1, nullable: false },
+                            { column_name : 'clothes_merk', data_type: 'string', max: 75, min: 1, nullable: true },
+                            { column_name : 'clothes_image', data_type: 'string', max: 500, min: 1, nullable: true },    
+                            { column_name : 'clothes_color', data_type: 'string', max: 36, min: 1, nullable: true },    
+                            { column_name : 'clothes_type', data_type: 'string', max: 36, min: 1, nullable: false },
+                            { column_name : 'has_washed', data_type: 'number', max: 1, min: 0, nullable: false },
+                        ]
+                        cy.templateValidateMaxMin(dt_cl, columnPropsClothes)
                     })
                 }
             })
