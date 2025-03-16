@@ -4,12 +4,12 @@ import '../../components/template'
 describe('Wardrobe API Testing - Auth', () => {
 
     it('Get Sign Out', () => {
-        const body = {
+        const payload = {
             username : "flazefy",
             password: 'nopass123',
         }
 
-        cy.templateE2ELogin(body.username, body.password).then(token => {
+        cy.templateE2ELogin(payload.username, payload.password).then(token => {
             cy.request({
                 method: 'get',
                 url: `/api/v1/logout`,

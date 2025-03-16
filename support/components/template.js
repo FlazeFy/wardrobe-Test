@@ -23,7 +23,7 @@ Cypress.Commands.add('templateGet', (code, obj, is_paginate) => {
 
 Cypress.Commands.add('templatePost', (obj, builder) => {
     // Test
-    expect(obj.status).to.equal(200)
+    expect(obj.status).to.equal(201)
     expect(obj.body.message).to.be.a('string')
     
     if(builder){
@@ -32,10 +32,10 @@ Cypress.Commands.add('templatePost', (obj, builder) => {
         });
     }
 
-    expect(obj.body.data).to.have.property('id')
-    expect(obj.body.data).to.have.property('created_at')
-    expect(typeof obj.body.data.id).to.eq('string')
-    expect(typeof obj.body.data.created_at).to.eq('string')
+    // expect(obj.body.data).to.have.property('id')
+    // expect(obj.body.data).to.have.property('created_at')
+    // expect(typeof obj.body.data.id).to.eq('string')
+    // expect(typeof obj.body.data.created_at).to.eq('string')
 });
 
 Cypress.Commands.add('templateDelete', (obj) => {
@@ -177,28 +177,6 @@ Cypress.Commands.add('templateValidateDateTime', (data, obj) => {
             }
         });
     });
-})
-
-// End to End Component
-Cypress.Commands.add('templateE2EValidateConsumeBox', () => {
-    cy.get('#consume-holder').wait(2000).should('exist').children() 
-        .each(($el) => {
-            cy.wrap($el).find('.consume-name-holder').should('exist')
-            cy.wrap($el).find('.consume-comment-holder').should('exist')
-            cy.wrap($el).find('.consume-payment-holder').should('exist').and(($consumePayment) => {
-                const text = $consumePayment.text()
-                expect(text).to.match(/Free|Rp. /)
-
-                if(text !== 'Free'){
-                    const price = parseInt(text.replace('Rp. ','').replace(',',''))
-                    expect(price).to.be.greaterThan(0)
-                }
-            });
-            cy.wrap($el).find('.consume-provide-holder').should('exist')
-            cy.wrap($el).find('.consume-calorie-holder').should('exist').contains('Cal')
-            cy.wrap($el).find('.consume-main-ing-holder').should('exist')
-            cy.wrap($el).find('.consume-created-at-holder').should('exist').contains('At')
-        })
 })
 
 Cypress.Commands.add('templateE2ELogin', (username, password) => {

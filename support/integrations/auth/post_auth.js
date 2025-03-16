@@ -5,15 +5,15 @@ describe('Wardrobe API Testing - Auth', () => {
     const method = 'post'
 
     it('Post Login', () => {
-        const body = {
+        const payload = {
             username : "flazefy",
             password : 'nopass123',
         }
-        
+
         cy.request({
             method: method,
             url: '/api/v1/login',
-            body: body
+            body: payload
         }).as('PostLogin')
         cy.get('@PostLogin').then(dt => {
             expect(dt.status).to.equal(200)
