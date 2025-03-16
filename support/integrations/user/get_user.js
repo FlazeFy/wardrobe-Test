@@ -41,6 +41,13 @@ describe('Wardrobe API Testing - User', () => {
                 { column_name : 'telegram_is_valid', data_type: 'number', max: 1, min: 0, nullable: false },
             ]
             cy.templateValidateMaxMin(dataObj, columnProps)
+
+            // Validate datetime
+            const columnDateTime = [
+                { column_name : 'created_at', date_type: 'datetime', nullable: false },
+                { column_name : 'updated_at', date_type: 'datetime', nullable: true },
+            ]
+            cy.templateValidateDateTime(dataObj, columnDateTime)
         })
     })
 })

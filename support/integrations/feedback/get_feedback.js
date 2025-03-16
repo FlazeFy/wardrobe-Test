@@ -40,6 +40,12 @@ describe('Wardrobe API Testing - Feedback', () => {
                 { column_name : 'feedback_rate', data_type: 'number', max: 5, min: 1, nullable: false },
             ]
             cy.templateValidateMaxMin(dataArr, columnProps)
+
+            // Validate datetime
+            const columnDateTime = [
+                { column_name : 'created_at', date_type: 'datetime', nullable: false },
+            ]
+            cy.templateValidateDateTime(dataArr, columnDateTime)
         })
     })
 })

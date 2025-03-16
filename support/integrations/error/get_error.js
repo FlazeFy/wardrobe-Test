@@ -44,6 +44,12 @@ describe('Wardrobe API Testing - Error', () => {
                 { column_name : 'stack_trace', data_type: 'string', max: null, min: 1, nullable: false },
             ]
             cy.templateValidateMaxMin(dataArr, columnProps)
+
+            // Validate datetime
+            const columnDateTime = [
+                { column_name : 'created_at', date_type: 'datetime', nullable: false },
+            ]
+            cy.templateValidateDateTime(dataArr, columnDateTime)
         })
     })
 })

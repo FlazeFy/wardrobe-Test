@@ -154,6 +154,31 @@ Cypress.Commands.add('templateValidateMaxMin', (data, obj) => {
     });
 })
 
+Cypress.Commands.add('templateValidateDateTime', (data, obj) => {
+    const dataArray = Array.isArray(data) ? data : [data];
+
+    dataArray.forEach((item) => {
+        obj.forEach((field) => {
+            const col_name = field['column_name']
+            const date_type = field['date_type']
+            const nullable = field['nullable']
+
+            if (!nullable || item[col_name] != null) {
+                if (date_type === "datetime") {
+                    expect(item[col_name]).to.match(
+                        /^(?:\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z?|\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})$/,
+                        `${col_name} must be a valid datetime (ISO 8601 or SQL format)`
+                    );                    
+                } else if (date_type === "time") {
+                    expect(item[col_name]).to.match(/^\d{2}:\d{2}:\d{2}$/, `${col_name} must be a valid time`);
+                } else if (date_type === "date") {
+                    expect(item[col_name]).to.match(/^\d{4}-\d{2}-\d{2}$/, `${col_name} must be a valid date`);
+                }
+            }
+        });
+    });
+})
+
 // End to End Component
 Cypress.Commands.add('templateE2EValidateConsumeBox', () => {
     cy.get('#consume-holder').wait(2000).should('exist').children() 

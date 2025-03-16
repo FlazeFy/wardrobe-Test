@@ -36,6 +36,12 @@ describe('Wardrobe API Testing - Question', () => {
                 { column_name : 'answer', data_type: 'string', max: 255, min: 1, nullable: false },
             ]
             cy.templateValidateMaxMin(dataArr, columnProps)
+
+            // Validate datetime
+            const columnDateTime = [
+                { column_name : 'created_at', date_type: 'datetime', nullable: false },
+            ]
+            cy.templateValidateDateTime(dataArr, columnDateTime)
         })
     })
 })
