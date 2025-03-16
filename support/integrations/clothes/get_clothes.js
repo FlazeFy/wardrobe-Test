@@ -134,6 +134,15 @@ describe('Wardrobe API Testing - Clothes', () => {
                 { column_name : 'is_scheduled', data_type: 'number', max: 1, min: 0, nullable: false },
             ]
             cy.templateValidateMaxMin(dataArr, columnPropsClothes)
+
+            // Validate datetime
+            const columnDateTime = [
+                { column_name : 'created_at', date_type: 'datetime', nullable: false },
+                { column_name : 'updated_at', date_type: 'datetime', nullable: true },
+                { column_name : 'deleted_at', date_type: 'datetime', nullable: true },
+                { column_name : 'clothes_buy_at', date_type: 'date', nullable: true },
+            ]
+            cy.templateValidateDateTime(dataArr, columnDateTime)
         })
     })
 
@@ -263,6 +272,13 @@ describe('Wardrobe API Testing - Clothes', () => {
                 { column_name : 'clothes_qty', data_type: 'number', max: 999, min: 1, nullable: false },
             ]
             cy.templateValidateMaxMin(dataArr, columnProps)
+
+            // Validate datetime
+            // In the DB, deleted_at can be null. But for this API it must be not null
+            const columnDateTime = [
+                { column_name : 'deleted_at', date_type: 'datetime', nullable: false },
+            ]
+            cy.templateValidateDateTime(dataArr, columnDateTime)
         })
     })
 
@@ -295,6 +311,15 @@ describe('Wardrobe API Testing - Clothes', () => {
             cy.templateValidateColumn(dataObj['detail'], stringNullableFieldsDetail, 'string', true)
             cy.templateValidateColumn(dataObj['detail'], intFieldsDetail, 'number', false)  
             
+            // Validate datetime
+            const columnDateTime = [
+                { column_name : 'created_at', date_type: 'datetime', nullable: false },
+                { column_name : 'updated_at', date_type: 'datetime', nullable: true },
+                { column_name : 'deleted_at', date_type: 'datetime', nullable: true },
+                { column_name : 'clothes_buy_at', date_type: 'date', nullable: true },
+            ]
+            cy.templateValidateDateTime(dataObj['detail'], columnDateTime)
+
             if(dataObj['used_history']){
                 dataObj['used_history'].forEach(dt => {
                     // Get list key / column
@@ -312,6 +337,12 @@ describe('Wardrobe API Testing - Clothes', () => {
                         { column_name : 'clothes_note', data_type: 'string', max: 255, min: 1, nullable: true },
                     ]
                     cy.templateValidateMaxMin(dt, columnPropsUsedHistory)
+
+                    // Validate datetime
+                    const columnDateTimeUsedHistory = [
+                        { column_name : 'created_at', date_type: 'datetime', nullable: false },
+                    ]
+                    cy.templateValidateDateTime(dt, columnDateTimeUsedHistory)
                 })
             }
 
@@ -333,6 +364,13 @@ describe('Wardrobe API Testing - Clothes', () => {
                         { column_name : 'wash_note', data_type: 'string', max: 75, min: 1, nullable: false },
                     ]
                     cy.templateValidateMaxMin(dt, columnPropsWashHistory)
+
+                    // Validate datetime
+                    const columnDateTimeWashHistory = [
+                        { column_name : 'created_at', date_type: 'datetime', nullable: false },
+                        { column_name : 'finished_at', date_type: 'datetime', nullable: true },
+                    ]
+                    cy.templateValidateDateTime(dt, columnDateTimeWashHistory)
 
                     if(dt['wash_checkpoint']){
                         dt['wash_checkpoint'].forEach(dt_wc => {
@@ -368,6 +406,13 @@ describe('Wardrobe API Testing - Clothes', () => {
                         { column_name : 'total_used', data_type: 'number', max: null, min: 0, nullable: false },
                     ]
                     cy.templateValidateMaxMin(dt, columnPropsOutfit)
+
+                    // Validate datetime
+                    const columnDateTimeOutfit = [
+                        { column_name : 'created_at', date_type: 'datetime', nullable: false },
+                        { column_name : 'last_used', date_type: 'datetime', nullable: true },
+                    ]
+                    cy.templateValidateDateTime(dt, columnDateTimeOutfit)
                 })
             }
         })

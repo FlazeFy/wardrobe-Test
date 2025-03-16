@@ -201,12 +201,12 @@ Cypress.Commands.add('templateE2EValidateConsumeBox', () => {
         })
 })
 
-Cypress.Commands.add('templateE2ELogin', (email, password) => {
+Cypress.Commands.add('templateE2ELogin', (username, password) => {
     return cy.request({
         method: 'POST', 
         url: 'api/v1/login',
         body: {
-            email: email,
+            username: username,
             password: password,
         },
     }).then(res => {
