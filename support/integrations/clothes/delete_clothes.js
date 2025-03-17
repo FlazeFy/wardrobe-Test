@@ -69,4 +69,20 @@ describe('Wardrobe API Testing - Clothes', () => {
             expect(dt.body.message).contain('clothes wash permentally deleted')
         })
     })
+
+    it('Hard Delete Used Outfit By Id', () => {
+        const outfit_id = '17963858-9771-11ee-8f4a-32164291er4w' 
+        
+        cy.request({
+            method: method,
+            url: `/api/v1/clothes/outfit/history/by/${outfit_id}`,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).as('HardDeleteUsedOutfitById')
+        cy.get('@HardDeleteUsedOutfitById').then(dt => {
+            cy.templateDelete(dt)
+            expect(dt.body.message).contain('outfit history permentally deleted')
+        })
+    })
 })
