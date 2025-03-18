@@ -1,7 +1,7 @@
 // Components
 import '../../components/template'
 
-describe('Wardrobe API Testing - Auth', () => {
+describe('Wardrobe Integration Test - Auth', () => {
     const method = 'post'
 
     it('Post Login', () => {

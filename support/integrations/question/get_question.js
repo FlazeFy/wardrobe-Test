@@ -2,7 +2,7 @@
 import { generateAuthToken } from '../../components/generate'
 import '../../components/template'
 
-describe('Wardrobe API Testing - Question', () => {
+describe('Wardrobe Integration Test - Question', () => {
     const is_paginate = false
     const token = generateAuthToken("hardcode")
 

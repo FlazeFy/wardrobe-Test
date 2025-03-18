@@ -2,7 +2,7 @@
 import { generateAuthToken } from '../../components/generate'
 import '../../components/template'
 
-describe('Wardrobe API Testing - Error', () => {
+describe('Wardrobe Integration Test - Error', () => {
     const is_paginate = true
     const token = generateAuthToken("hardcode_admin")
 

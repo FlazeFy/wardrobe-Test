@@ -2,7 +2,7 @@
 import { generateAuthToken } from '../../components/generate'
 import '../../components/template'
 
-describe('Wardrobe API Testing - Clothes', () => {
+describe('Wardrobe Integration Test - Clothes', () => {
     const method = 'delete'
     const token = generateAuthToken("hardcode")
 
