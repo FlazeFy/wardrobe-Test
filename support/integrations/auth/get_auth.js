@@ -9,7 +9,7 @@ describe('Wardrobe Integration Test - Auth', () => {
             password: 'nopass123',
         }
 
-        cy.templateE2ELogin(payload.username, payload.password).then(token => {
+        cy.templateE2ELoginAPI(payload.username, payload.password).then(token => {
             cy.request({
                 method: 'get',
                 url: `/api/v1/logout`,

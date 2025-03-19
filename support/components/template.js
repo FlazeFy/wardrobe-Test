@@ -180,6 +180,23 @@ Cypress.Commands.add('templateValidateDateTime', (data, obj) => {
 })
 
 Cypress.Commands.add('templateE2ELogin', (username, password) => {
+    const BASEURL = 'http://localhost:3000'
+    const date = new Date().toISOString().replace(/:/g, '-')
+
+    // Pre Condition : User Must Logged In To Their Account
+    cy.visit(`${BASEURL}/`)
+    cy.get('#username-input').type(username)
+    cy.get('#password-input').type(password)
+    cy.get('#submit-login-button').click()
+    cy.get('.swal2-popup', { timeout: 5000 }).should('exist')
+    .then(() => {
+        cy.get('.swal2-popup').contains('button', 'Okay!').click()
+    })
+    cy.url().should('include', '/clothes')
+    cy.screenshot(`TC-US-001_Pre Condition-${date}`)
+})
+
+Cypress.Commands.add('templateE2ELoginAPI', (username, password) => {
     return cy.request({
         method: 'POST', 
         url: 'api/v1/login',
