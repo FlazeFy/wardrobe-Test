@@ -1,4 +1,3 @@
-import { convertUcFirst } from "../../components/converter"
 // Components
 import '../../components/template'
 
@@ -10,7 +9,7 @@ describe('Wardrobe E2E Test - TC-US-001 - User', () => {
     it('User Can See Their Profile', () => {
         // Pre Condition : User Must Logged In To Their Account
         cy.templateE2ELogin(username, password).then(() => {
-            // Step 1: After Signed In. In the Navbar, Click the menu button that contain username 
+            // Step 1: After Signed In. In the Navbar, Click the menu button that contain username to open the Profile Page
             cy.get('.navbar').contains('a', username).click()
             cy.url().should('include', '/profile')
 
