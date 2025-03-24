@@ -14,12 +14,12 @@ describe('Wardrobe E2E Test - TC-ST-005 - Stats', () => {
             cy.url().should('include', '/stats')
 
             // Step 2: Find section "Yearly Activity". It should have chart and label of day name
-            cy.get(`#clothes_yearly_activity_stats-section"`).contains('Yearly Activity')
+            cy.get(`#clothes_yearly_activity_stats-section`).contains('Yearly Activity')
             cy.get('#clothes_yearly_activity_stats-section').within(() => {
                 cy.get('.apexcharts-canvas').should('exist')
                 cy.get('.apexcharts-legend').should('exist')
             });   
-            const labelChart = ['Days','Mon','Tue','Wed','Thu','Fri','Sat','Dec']
+            const labelChart = ['Days','Mon','Tue','Wed','Thu','Fri','Sat']
             labelChart.forEach(dt => {
                 cy.get(`#clothes_yearly_activity_stats-section`).contains(dt)
             })
