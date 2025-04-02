@@ -1,7 +1,7 @@
 // Components
 import '../../components/template'
 
-describe('Wardrobe E2E Test - TC-CL-001 - Trash', () => {
+describe('Wardrobe E2E Test - TC-CL-001 - Clothes', () => {
     const username = 'flazefy'
     const password = 'nopass123'
     const date = new Date().toISOString().replace(/:/g, '-')
