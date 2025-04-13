@@ -1,4 +1,5 @@
 // Components
+import { generateMonthName } from '../../components/generate'
 import '../../components/template'
 
 describe('Wardrobe E2E Test - TC-ST-004 - Stats', () => {
@@ -22,6 +23,10 @@ describe('Wardrobe E2E Test - TC-ST-004 - Stats', () => {
             const labelChart = ['Total Created','Total Buyed']
             labelChart.forEach(dt => {
                 cy.get(`#clothes_monthly_activity_stats-section`).contains(dt)
+            })
+            const monthsName = generateMonthName('all','short')
+            cy.get('.apexcharts-xaxis-label title').each(($el, idx) => {
+                cy.wrap($el).invoke('text').should('eq', monthsName[idx])
             })
             
             // Evidence - Step 2
