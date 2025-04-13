@@ -1,7 +1,7 @@
 // Components
 import '../../components/template'
 
-describe('Wardrobe E2E Test - TC-CL-005 - Clothes', () => {
+describe('Wardrobe E2E Test - TC-UH-001 - Used History', () => {
     const username = 'flazefy'
     const password = 'nopass123'
     const date = new Date().toISOString().replace(/:/g, '-')
@@ -61,7 +61,7 @@ describe('Wardrobe E2E Test - TC-CL-005 - Clothes', () => {
             })
 
             // Evidence - Step 3
-            cy.screenshot(`TC-CL-005_Step-2-${date}`)
+            cy.screenshot(`TC-UH-001_Step-3-${date}`)
         })
     })
 })
