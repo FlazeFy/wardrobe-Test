@@ -76,6 +76,25 @@ export const generateMonthName = (idx, type) => {
     return res
 }
 
+export const generateRules = (type) => {
+    if(type == 'used_context'){
+        return ['Worship','Shopping','Work','School','Campus','Sport','Party']
+    } else if(type == 'wash_type'){
+        return ['Laundry','Self-Wash']
+    } else if(type == 'clothes_type'){
+        return ['hat', 'pants', 'shirt', 'jacket', 'shoes', 'socks', 'scarf', 'gloves', 'shorts', 'skirt', 'dress', 'blouse', 'sweater', 'hoodie', 'tie', 'belt', 
+        'coat', 'underwear', 'swimsuit', 'vest', 't-shirt', 'jeans', 'leggings', 'boots', 'sandals', 'sneakers', 'raincoat', 'poncho', 'cardigan']
+    } else if(type == 'clothes_size'){
+        return ['S','M','L','XL','XXL','XXL']
+    } else if(type == 'clothes_made_from'){
+        return ['cotton','wool','silk','linen','polyester','denim','leather','nylon','rayon','synthetic','cloth']
+    } else if(type == 'clothes_gender'){
+        return ['male','female','unisex']
+    } else if(type == 'clothes_category'){
+        return ['upper_body','bottom_body','head','foot','hand']
+    }
+}
+
 export const  generateRandNumber= (max, min) => {
     const res = Math.floor(Math.random() * max) + min
 
