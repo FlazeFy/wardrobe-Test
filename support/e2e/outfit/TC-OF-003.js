@@ -1,5 +1,4 @@
 // Components
-import { generateMonthName } from '../../components/generate'
 import '../../components/template'
 
 describe('Wardrobe E2E Test - TC-OF-003 - Outfit', () => {
