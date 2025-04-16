@@ -51,10 +51,14 @@ export const generateRandDate = () => {
 
 export const generateDayName = (date) => {
     const daysName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-    const dayIdx = date.getDay()
-    const res = daysName[dayIdx]
+    if(date != null){
+        const dayIdx = date.getDay()
+        const res = daysName[dayIdx]
 
-    return res
+        return res
+    } else {
+        return daysName
+    }
 }
 
 export const generateMonthName = (idx, type) => {
