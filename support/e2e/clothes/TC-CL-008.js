@@ -1,12 +1,12 @@
 // Components
 import '../../components/template'
 
-describe('Wardrobe E2E Test - TC-CL-007 - Clothes', () => {
+describe('Wardrobe E2E Test - TC-CL-008 - Clothes', () => {
     const username = 'flazefy'
     const password = 'nopass123'
     const date = new Date().toISOString().replace(/:/g, '-')
     const clothes_data = {
-        clothes_name: 'Casual T-Shirt',
+        clothes_name: 'Casual T-Shirt New - Comfortable, stylish, breathable, lightweight, and durable',
         clothes_desc: 'A comfortable cotton t-shirt perfect for daily wear.',
         clothes_merk: 'Uniqlo',
         clothes_price: 199,
@@ -22,7 +22,7 @@ describe('Wardrobe E2E Test - TC-CL-007 - Clothes', () => {
         is_favorite: true
     };
 
-    it('User Can Add A Clothes With Valid Data', () => {
+    it('User Cant Add A Clothes With Invalid Long Character Clothes Name', () => {
         // Pre Condition : User Must Logged In To Their Account
         cy.templateE2ELogin(username, password).then(() => {
             // Step 1: After Signed In. In the Navbar, Click the menu "Clothes"
@@ -51,26 +51,21 @@ describe('Wardrobe E2E Test - TC-CL-007 - Clothes', () => {
                 cy.get('#is_favorite').check({ force: clothes_data.is_favorite })
 
                 // Evidence - Step 3
-                cy.screenshot(`TC-CL-007_Step-3-${date}`)
+                cy.screenshot(`TC-CL-008_Step-3-${date}`)
 
                 // Step 4: Click the "Save Changes" button
                 cy.contains('button', 'Save Changes').click()
             });
 
-            // Step 5: An Pop Up will appear with text "clothes created, its called 'Casual T-Shirt'". Click "Okay!"
+            // Step 5: An Pop Up will appear with text "The clothes name field must not be greater than 75 characters". Click "Okay!"
             cy.get('.swal2-popup:not(.swal2-loading)', { timeout: 10000 }).should('exist').then(() => {
                 cy.get('.swal2-html-container').invoke('text').then((text)=>{
-                    expect(text).to.equal(`clothes created, its called '${clothes_data.clothes_name}'`)
+                    expect(text).to.equal(`The clothes name field must not be greater than 75 characters`)
                 })
                 // Evidence - Step 5
-                cy.screenshot(`TC-CL-007_Step-5-${date}`)
+                cy.screenshot(`TC-CL-008_Step-5-${date}`)
                 cy.get('.swal2-popup').contains('button', 'Okay!').click()
             })
-
-            // Expected Result
-            cy.url().should('include', '/clothes/detail')
-            // Evidence - Expected Result
-            cy.screenshot(`TC-CL-007_Step-5-${date}`)
         })
     })
 })
