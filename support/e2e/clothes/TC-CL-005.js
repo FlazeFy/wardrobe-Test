@@ -26,7 +26,7 @@ describe('Wardrobe E2E Test - TC-CL-005 - Clothes', () => {
                 }
             })
 
-            // Step 3: In the Clothes Detail page, find "Schedule" section and there will be a table that contain context, notes, used at, and delete button
+            // Step 3: In the Clothes Detail page, find "Schedule" section and there will be a table that contain day, notes, created at, and delete button
             cy.url().should('include','/clothes/detail')
             cy.get('#schedule-section').should('exist').contains('Schedule')
             const expected_header = ['Day','Schedule Notes','Created At','Delete']

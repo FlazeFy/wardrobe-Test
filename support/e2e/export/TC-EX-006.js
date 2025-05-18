@@ -36,7 +36,7 @@ describe('Wardrobe E2E Test - TC-EX-006 - Export', () => {
                 })
             })
 
-            // Step 3: Success pop up with text "Apps data downloaded" will appear
+            // Step 3: Success pop up with text "Calendar daily report downloaded" will appear
             cy.get('.swal2-popup:not(.swal2-loading)', { timeout: 5000 }).should('exist').then(() => {
                 cy.get('.swal2-html-container').invoke('text').then((text)=>{
                     expect(text).to.equal('Calendar daily report downloaded')

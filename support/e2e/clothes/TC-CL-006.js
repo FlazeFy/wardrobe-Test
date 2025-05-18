@@ -26,6 +26,7 @@ describe('Wardrobe E2E Test - TC-CL-006 - Clothes', () => {
             })
 
             // Step 3: In the Clothes Detail page, find "Schedule" section and there will be a table that contain context, notes, used at, and delete button
+            // Click the first item delete button
             cy.url().should('include','/clothes/detail')
             cy.get('#schedule-section').should('exist').contains('Schedule')
             cy.get('#schedule-table tbody tr').first().find('td').last().find('button').click()  

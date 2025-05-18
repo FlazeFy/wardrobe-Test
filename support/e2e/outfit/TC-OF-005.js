@@ -19,7 +19,7 @@ describe('Wardrobe E2E Test - TC-OF-005 - Outfit', () => {
             // Evidence - Step 2
             cy.screenshot(`TC-OF-005_Step-2-${date}`)
 
-            // Step 3: Find section "My Outfit", choose and click the first item who have clothes attached
+            // Step 3: Find section "My Outfit", choose and click the first item
             cy.get('h1').contains('My Outfit')
             cy.get('#outfit-holder .box-clothes').first().click()
             

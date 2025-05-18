@@ -22,7 +22,7 @@ describe('Wardrobe E2E Test - TC-EX-005 - Export', () => {
                 })
             })
 
-            // Step 3: Success pop up with text "Apps data downloaded" will appear
+            // Step 3: Success pop up with text "History data downloaded" will appear
             cy.get('.swal2-popup:not(.swal2-loading)', { timeout: 5000 }).should('exist').then(() => {
                 cy.get('.swal2-html-container').invoke('text').then((text)=>{
                     expect(text).to.equal('History data downloaded')

@@ -11,7 +11,7 @@ describe('Wardrobe E2E Test - TC-FB-001 - Feedback', () => {
     it('User Can Post A Feedback With Valid Input', () => {
         // Pre Condition : User Must Logged In To Their Account
         cy.templateE2ELogin(username, password).then(() => {
-            // Step 1: After Signed In. In the Navbar, Click the menu "Stats"
+            // Step 1: After Signed In. In the Navbar, Click the menu "Feedback"
             cy.get('.navbar').contains('a', 'Feedback').click()
             cy.url().should('include', '/feedback')
 
