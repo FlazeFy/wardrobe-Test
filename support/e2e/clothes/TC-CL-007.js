@@ -57,7 +57,7 @@ describe('Wardrobe E2E Test - TC-CL-007 - Clothes', () => {
                 cy.contains('button', 'Save Changes').click()
             });
 
-            // Step 5: An Pop Up will appear with text "clothes created, its called 'Casual T-Shirt'". Click "Okay!"
+            // Step 5: A Success Pop Up will appear with text "clothes created, its called 'Casual T-Shirt'". Click "Okay!"
             cy.get('.swal2-popup:not(.swal2-loading)', { timeout: 10000 }).should('exist').then(() => {
                 cy.get('.swal2-html-container').invoke('text').then((text)=>{
                     expect(text).to.equal(`clothes created, its called '${clothes_data.clothes_name}'`)

@@ -1,12 +1,21 @@
 // Components
 import '../../components/template'
 
-describe('Wardrobe E2E Test - TC-CL-008 - Clothes', () => {
+describe('Wardrobe E2E Test - TC-CL-009 - Clothes', () => {
     const username = 'flazefy'
     const password = 'nopass123'
     const date = new Date().toISOString().replace(/:/g, '-')
+
+    const today = new Date()
+    const tomorrow = new Date(today)
+    tomorrow.setDate(today.getDate() + 1)
+
+    const yyyy = tomorrow.getFullYear();
+    const mm = String(tomorrow.getMonth() + 1).padStart(2, '0')
+    const dd = String(tomorrow.getDate()).padStart(2, '0')
+
     const clothes_data = {
-        clothes_name: 'Casual T-Shirt New - Comfortable, stylish, breathable, lightweight, and durable',
+        clothes_name: 'Casual T-Shirt',
         clothes_desc: 'A comfortable cotton t-shirt perfect for daily wear.',
         clothes_merk: 'Uniqlo',
         clothes_price: 199,
@@ -16,13 +25,13 @@ describe('Wardrobe E2E Test - TC-CL-008 - Clothes', () => {
         clothes_type: 'shirt',
         clothes_made_from: 'cloth',
         clothes_category: 'upper_body',
-        clothes_buy_at: '2024-01-01',
+        clothes_buy_at: `${yyyy}-${mm}-${dd}`,
         is_faded: true,
         has_ironed: true,
         is_favorite: true
     };
 
-    it('User Cant Add A Clothes With Invalid Long Character Clothes Name', () => {
+    it('User Cant Add A Clothes With Clothes Buy At Date More Than Today Date', () => {
         // Pre Condition : User Must Logged In To Their Account
         cy.templateE2ELogin(username, password).then(() => {
             // Step 1: After Signed In. In the Navbar, Click the menu "Clothes"
@@ -51,19 +60,19 @@ describe('Wardrobe E2E Test - TC-CL-008 - Clothes', () => {
                 cy.get('#is_favorite').check({ force: clothes_data.is_favorite })
 
                 // Evidence - Step 3
-                cy.screenshot(`TC-CL-008_Step-3-${date}`)
+                cy.screenshot(`TC-CL-009_Step-3-${date}`)
 
                 // Step 4: Click the "Save Changes" button
                 cy.contains('button', 'Save Changes').click()
             });
 
-            // Step 5: A Failed Pop Up will appear with text "The clothes name field must not be greater than 75 characters". Click "Okay!"
+            // Step 5: A Failed Pop Up will appear with text "You can't set clothes buy at date more than today date". Click "Okay!"
             cy.get('.swal2-popup:not(.swal2-loading)', { timeout: 10000 }).should('exist').then(() => {
                 cy.get('.swal2-html-container').invoke('text').then((text)=>{
-                    expect(text).to.equal(`The clothes name field must not be greater than 75 characters`)
+                    expect(text).to.equal(`You can't set clothes buy at date more than today date`)
                 })
                 // Evidence - Step 5
-                cy.screenshot(`TC-CL-008_Step-5-${date}`)
+                cy.screenshot(`TC-CL-009_Step-5-${date}`)
                 cy.get('.swal2-popup').contains('button', 'Okay!').click()
             })
         })
