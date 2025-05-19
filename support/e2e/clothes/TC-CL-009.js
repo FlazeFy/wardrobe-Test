@@ -44,17 +44,17 @@ describe('Wardrobe E2E Test - TC-CL-009 - Clothes', () => {
 
             // Step 3: Fill the Clothes Data in Form at the Section "Add Form" 
             cy.contains('.form-container', 'Add Form').within(() => {
-                cy.get('#clothes_name').type(clothes_data.clothes_name);
-                cy.get('#clothes_desc').type(clothes_data.clothes_desc);
-                cy.get('#clothes_merk').type(clothes_data.clothes_merk);
-                cy.get('#clothes_price').clear().type(clothes_data.clothes_price.toString());
-                cy.get('#clothes_qty').clear().type(clothes_data.clothes_qty.toString());
-                cy.get('#clothes_gender').select(clothes_data.clothes_gender);
-                cy.get('#clothes_size').select(clothes_data.clothes_size);
-                cy.get('#clothes_type').select(clothes_data.clothes_type);
-                cy.get('#clothes_made_from').select(clothes_data.clothes_made_from);
-                cy.get('#clothes_category').select(clothes_data.clothes_category);
-                cy.get('#clothes_buy_at').type(clothes_data.clothes_buy_at);
+                cy.get('#clothes_name').type(clothes_data.clothes_name)
+                cy.get('#clothes_desc').type(clothes_data.clothes_desc)
+                cy.get('#clothes_merk').type(clothes_data.clothes_merk)
+                cy.get('#clothes_price').clear().type(clothes_data.clothes_price.toString())
+                cy.get('#clothes_qty').clear().type(clothes_data.clothes_qty.toString())
+                cy.get('#clothes_gender').select(clothes_data.clothes_gender)
+                cy.get('#clothes_size').select(clothes_data.clothes_size)
+                cy.get('#clothes_type').select(clothes_data.clothes_type)
+                cy.get('#clothes_made_from').select(clothes_data.clothes_made_from)
+                cy.get('#clothes_category').select(clothes_data.clothes_category)
+                cy.get('#clothes_buy_at').type(clothes_data.clothes_buy_at)
                 cy.get('#is_faded').check({ force: clothes_data.is_faded })   
                 cy.get('#has_ironed').check({ force: clothes_data.has_ironed })
                 cy.get('#is_favorite').check({ force: clothes_data.is_favorite })
