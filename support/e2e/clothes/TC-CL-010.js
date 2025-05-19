@@ -32,6 +32,8 @@ describe('Wardrobe E2E Test - TC-CL-010 - Clothes', () => {
             // Step 2: In the Clothes Page, Search "Add Clothes" button
             cy.contains('a', 'Add Clothes').click()
             cy.url().should('include', '/clothes/add')
+            // Evidence - Step 2
+            cy.screenshot(`TC-CL-010_Step-2-${date}`)
 
             // Step 3: Fill the Clothes Data in Form at the Section "Add Form" 
             cy.contains('.form-container', 'Add Form').within(() => {
