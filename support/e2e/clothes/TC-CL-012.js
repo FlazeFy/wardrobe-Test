@@ -21,7 +21,7 @@ describe('Wardrobe E2E Test - TC-CL-012 - Clothes', () => {
 
             // Step 3: There will be section with title "Last History" title. Inside it you will find Last Added Clothes and its date, alongside with Last Deleted and its date
             cy.get('#last_history-section').within(() => {
-                cy.get('h1').should('contain.text', 'Last History');
+                cy.get('h1').should('contain.text', 'Last History')
               
                 // Last Added & Last Deleted
                 const date_holder = ['Last Added','Last Deleted']
