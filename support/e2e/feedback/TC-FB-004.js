@@ -1,13 +1,14 @@
 // Components
 import '../../components/template'
 
-describe('Wardrobe E2E Test - TC-FB-003 - Feedback', () => {
+describe('Wardrobe E2E Test - TC-FB-004 - Feedback', () => {
     const username = 'flazefy'
     const password = 'nopass123'
     const date = new Date().toISOString().replace(/:/g, '-')
-    const feedback = 'this apps is lit!'
+    const feedback = 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor.'
+    const rate = 3 // 4 star
 
-    it('User Cant Post A Feedback With Empty Feedback Rate', () => {
+    it('User Cant Post A Feedback With Invalid Long Character Feedback Body', () => {
         // Pre Condition : User Must Logged In To Their Account
         cy.templateE2ELogin(username, password).then(() => {
             // Step 1: After Signed In. In the Navbar, Click the menu "Feedback"
@@ -17,20 +18,23 @@ describe('Wardrobe E2E Test - TC-FB-003 - Feedback', () => {
             // Step 2: In the "Give Us Feedback" section, user can see form of add feedback. Fill the form
             cy.get(`#send_feedback-section`).contains('Give Us Feedback')
             cy.get('#send_feedback-section #feedback_body-input').type(feedback)
-            cy.screenshot(`TC-FB-003_Step-2-${date}`)
+            cy.get('#send_feedback-section #feedback_rate-input').within(() => {
+                cy.get('span').eq(rate).click()
+            })
+            cy.screenshot(`TC-FB-004_Step-2-${date}`)
 
             // Step 3: Click the "Send Feedback" button
             cy.get('#send_feedback-section').contains('button','Send Feedback').click()
 
-            // Step 4: Failed pop up with text "The feedback rate field is required" will appear
+            // Step 4: Failed pop up with text "The feedback body field must not be greater than 144 characters" will appear
             cy.get('.swal2-popup:not(.swal2-loading)', { timeout: 5000 }).should('exist').then(() => {
                 cy.get('.swal2-html-container').invoke('text').then((text)=>{
-                    expect(text).to.equal('The feedback rate field is required')
+                    expect(text).to.equal('The feedback body field must not be greater than 144 characters')
                 })
                 cy.get('.swal2-popup').contains('button', 'Okay!').click()
             })
             // Evidence - Step 4
-            cy.screenshot(`TC-FB-003_Step-4-${date}`)
+            cy.screenshot(`TC-FB-004_Step-4-${date}`)
         })
     })
 })
