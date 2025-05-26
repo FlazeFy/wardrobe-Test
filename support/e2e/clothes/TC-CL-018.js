@@ -1,18 +1,18 @@
 // Components
 import '../../components/template'
 
-describe('Wardrobe E2E Test - TC-CL-017 - Clothes', () => {
+describe('Wardrobe E2E Test - TC-CL-018 - Clothes', () => {
     const username = 'flazefy'
     const password = 'nopass123'
     const date = new Date().toISOString().replace(/:/g, '-')
     const clothes_name = 'Casual T-Shirt'
 
     const schedule_data = {
-        day: 'Thu',
-        schedule_note: 'For working',
+        day: 'Fri',
+        schedule_note: 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Lorem ipsum dolor sit amet consectetur adipiscing elit',
     };
 
-    it('User Can Add Schedule With Valid Data', () => {
+    it('User Cant Add Schedule With Invalid Long Character Schedule Notes', () => {
         // Pre Condition : User Must Logged In To Their Account
         cy.templateE2ELogin(username, password).then(() => {
             // Step 1: After Signed In. In the Navbar, Click the menu "Clothes"
@@ -36,30 +36,30 @@ describe('Wardrobe E2E Test - TC-CL-017 - Clothes', () => {
             cy.get('#schedule-section').should('exist').contains('button','Schedule').click()
             
             // Evidence - Step 3
-            cy.screenshot(`TC-CL-017_Step-3-${date}`)
+            cy.screenshot(`TC-CL-018_Step-3-${date}`)
 
             // Step 4: A pop up will appear. In the "Add Schedule" form, fill with valid input
             cy.get('.modal.fade.show', { timeout: 5000 }).should('exist').within(() => {
                 cy.get('.modal-title').invoke('text').then((text) => {
                     expect(text).to.equal('Add Schedule')
                 })
-                // Notes & Context
+                // Notes & Day
                 cy.get('#day').select(schedule_data.day)
                 cy.get('#schedule_note').type(schedule_data.schedule_note, { force: true })
                 // Evidence - Step 4
-                cy.screenshot(`TC-CL-017_Step-4-${date}`)
+                cy.screenshot(`TC-CL-018_Step-4-${date}`)
 
                 // Step 5: Click the "Save" button
                 cy.get('.modal-footer').contains('button', 'Save').click()
             })           
 
-            // Step 6: A Success Pop Up will appear with text "schedule created". Click "Okay!"
+            // Step 6: A Failed Pop Up will appear with text "The schedule note field must not be greater than 255 characters". Click "Okay!"
             cy.get('.swal2-popup:not(.swal2-loading)', { timeout: 10000 }).should('exist').then(() => {
                 cy.get('.swal2-html-container').invoke('text').then((text)=>{
-                    expect(text).to.equal("schedule created")
+                    expect(text).to.equal("The schedule note field must not be greater than 255 characters")
                 })
                 // Evidence - Step 6
-                cy.screenshot(`TC-CL-017_Step-6-${date}`)
+                cy.screenshot(`TC-CL-018_Step-6-${date}`)
                 cy.get('.swal2-popup').contains('button', 'Okay!').click()
             })
         })
