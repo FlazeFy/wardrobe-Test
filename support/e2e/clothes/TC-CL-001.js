@@ -18,8 +18,7 @@ describe('Wardrobe E2E Test - TC-CL-001 - Clothes', () => {
             cy.get('#schedule_reminder-section').should('exist').contains("Don't forget, This clothes is set to wear today!")
             cy.get('#schedule_reminder-section').should('exist').contains(`Today is ${today}`)
 
-            cy.get('#schedule_reminder-section .row').find('.col-lg-3.col-md-4.col-sm-6.col-6').should('exist')
-            .each((el,idx) => {
+            cy.get('#schedule_reminder-section .row').find('.col-lg-3.col-md-4.col-sm-6.col-6').should('exist').each((el,idx) => {
                 if(idx > 0){
                     cy.wrap(el).find('.box-schedule-mini').should('exist').within(() => {
                         cy.get('h4').should('not.be.empty')
