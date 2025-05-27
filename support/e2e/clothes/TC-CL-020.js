@@ -9,7 +9,7 @@ describe('Wardrobe E2E Test - TC-CL-020 - Clothes', () => {
     it('User Can See Tommorow Schedule And Day after Tommorow Schedule', () => {
         // Pre Condition : User Must Logged In To Their Account
         cy.templateE2ELogin(username, password).then(() => {
-            // Step 1: After Signed In. In the Navbar, Click the menu "Clothes"
+            // Step 1: After Signed In. In the Navbar, Click the menu "Calendar"
             cy.get('.navbar').contains('a', 'Calendar').click()
             cy.url().should('include', '/calendar')
 
